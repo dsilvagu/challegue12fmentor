@@ -1,61 +1,33 @@
 ---
+import '@fontsource/barlow-semi-condensed';
+
 interface Props {
+	imagefont: string;
+	name: string;
+	verified: string;
+	photo: string;
 	title: string;
-	body: string;
-	href: string;
+	text:string;
+	colorback: string;
+	textcolorprimary: string;
+	textcolorsecundary: string;
+	borderimage: string;
 }
 
-const { href, title, body } = Astro.props;
+const {imagefont, name, verified, photo, title, text, colorback, textcolorprimary, textcolorsecundary, borderimage}= Astro.props;
 ---
 
-<li class="link-card">
-	<a href={href}>
-		<h2>
-			{title}
-			<span>&rarr;</span>
-		</h2>
-		<p>
-			{body}
-		</p>
-	</a>
-</li>
-<style>
-	.link-card {
-		list-style: none;
-		display: flex;
-		padding: 1px;
-		background-color: #23262d;
-		background-image: none;
-		background-size: 400%;
-		border-radius: 7px;
-		background-position: 100%;
-		transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
-	}
-	.link-card > a {
-		width: 100%;
-		text-decoration: none;
-		line-height: 1.4;
-		padding: calc(1.5rem - 1px);
-		border-radius: 8px;
-		color: white;
-		background-color: #23262d;
-		opacity: 0.8;
-	}
-	h2 {
-		margin: 0;
-		font-size: 1.25rem;
-		transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-	}
-	p {
-		margin-top: 0.5rem;
-		margin-bottom: 0;
-	}
-	.link-card:is(:hover, :focus-within) {
-		background-position: 0;
-		background-image: var(--accent-gradient);
-	}
-	.link-card:is(:hover, :focus-within) h2 {
-		color: rgb(var(--accent-light));
-	}
-</style>
+<div class=" font-barlow  rounded-lg px-12 py-6 flex flex-col gap-4 relative shadow-lg" class:list={colorback}>
+	
+	<div class="flex gap-5 items-center">
+		<img class:list={borderimage} class="rounded-full border size-10" src={photo} alt="">
+		<div class="text-sm">
+			<h1 class:list={textcolorprimary} class="font-bold">{name}</h1>
+			<h2 class:list={textcolorsecundary} class="text-xs font-thin">{verified}</h2>
+		</div>
+	</div>
+	<p class:list={textcolorprimary} class=" text-xl font-bold z-10">{title}</p>
+	<p class:list={textcolorsecundary} class="pb-5">{text}</p>
+
+	<img class="absolute top-0 right-8 " src={imagefont} alt="">
+</div>
